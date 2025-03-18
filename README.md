@@ -1,4 +1,4 @@
-# Snakamake_smallRNAseq
+# Snakemake_smallRNAseq
 
 workflow contains: FASTQC, FASTP, STAR and FEATURECOUNTS
 
