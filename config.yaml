@@ -1,0 +1,42 @@
+samples: ["SRR3703106","SRR3703107","SRR3703108","SRR3703109","SRR3703110","SRR3703111","SRR3703112","SRR3703113","SRR3703114","SRR3703115","SRR3703116","SRR3703117","SRR3703118","SRR3703119","SRR3703120","SRR3703121","SRR3703122","SRR3703123","SRR3703124","SRR3703125",
+"SRR3703126","SRR3703127","SRR3703128","SRR3703129","SRR3703130"]
+
+fastqc:
+  threads: 8
+  outdir: "results/fastqc"
+
+fastp:
+  threads: 4
+  outdir: "results/fastp"
+  report_dir: "results/fastp_reports"
+  params: " --qualified_quality_phred 20 --max_len1 24"
+
+fastqc_after:
+  threads: 8
+  outdir: "results/fastqc_after_fastp"
+
+star:
+  threads: 16
+  index: "/home/GEOdata"
+  outdir: "results/star"
+  sjdbGTFfeatureExon: "/home/zgao/pipeline_test/piRbase_cluster_GTF.gtf"
+  params: " --runMode alignReads --outSAMtype BAM Unsorted --outSAMattributes Standard "
+  params2: " --outSAMunmapped Within --outReadsUnmapped None --alignEndsType Local"
+  params3: " --outFilterMismatchNmax 0 --outFilterMultimapScoreRange 1 --outFilterMatchNmin 22 --outFilterMultimapNmax 1000000"
+
+
+featurecounts:
+  threads: 4
+  gtf: "/home/pipeline_test/piRbase_cluster_GTF.gtf"
+  outdir: "results/featurecounts"
+  feature_type: "piRbase"
+
+multiqc_fastqc:
+  outdir: "results/multiqc"
+  Threads: 4
+
+
+multiqc_after_fastp:
+  outdir: "results/multiqc"
+  Threads: 4
+
